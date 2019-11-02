@@ -6,9 +6,13 @@
 .auditImg{
     width: 10rem;
     height: 10rem;
-    background: bisque;
+    
     margin: 0 auto;
     margin-top: 5rem;
+}
+.auditImg img{
+    width: 100%;
+    height: 100%;
 }
 .auditTitle{
     width: 100%;
