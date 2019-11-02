@@ -26,6 +26,9 @@ p{
     box-sizing: border-box;
     border-bottom: 0.1rem solid #f1f1f1;
 }
+.centerBox  .qudiao{
+    border-bottom: none;
+  }
 /* 图片上传 */
 .upImg{
     border:  1px solid #ddd;
@@ -80,7 +83,42 @@ p{
   }
   .imgblog{
       display: flex;
-      justify-content: space-around;
+      justify-content: space-between;
       align-items: center;
       margin-top: 0.5rem;
   }
+  .ReturnButton{
+    width: 100%;
+    height: 6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .ReturnButton .ButtonDiv{
+    width: 70%;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
+  /* .ButtonDiv .PreviousStep{
+    width: 45%;
+    height: 3rem;
+    background-color: white;
+    color: #030303;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    border: 1px solid #9597a6;
+  } */
+  .ButtonDiv .Establish{
+    width: 100%;
+    height: 3rem;
+    background-color: #0CD4D3;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+  }
+  
