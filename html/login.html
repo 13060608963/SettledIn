@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="../css/meitichaxun.css" />
+    <link rel="stylesheet" href="../css/vant.css" />
+    <link rel="stylesheet" href="../css/register.css" />
+    <title>本地商家入驻</title>
+  </head>
+  <body>
+    <div id="app">
+      <div class="interval"></div>
+      <div class="register">
+        <div>
+          <div class="title">
+            <span>*</span>注册账号 <strong>(账号为海露商家后台登录账号)</strong>
+          </div>
+          <div class="registerInput">
+            <input
+              type="text"
+              placeholder="账号，6-20位数字、英文"
+              v-model="account"
+            />
+          </div>
+        </div>
+        <div>
+          <div class="title"><span>*</span>密码</div>
+          <div class="registerInput">
+            <input
+              type="text"
+              placeholder="密码，6-18位字符，必须有数字、英文两种"
+              v-model="password"
+            />
+          </div>
+        </div>
+        <div>
+          <div class="title">
+            <span>*</span>确认密码 <strong>(密码需要一致)</strong>
+          </div>
+          <div class="registerInput">
+            <input
+              type="text"
+              placeholder="密码，6-18位字符，必须有数字、英文两种"
+              v-model="passwords"
+            />
+          </div>
+        </div>
+        <div>
+          <div class="title">
+            <span>*</span>店铺经营者手机号 <strong
+              >(绑定手机号方便密码丢失时找回)</strong
+            >
+          </div>
+          <!-- <strong>(手机号为海露商家后台登录账号)</strong> -->
+          <div class="registerInput">
+            <input
+              type="text"
+              placeholder="账号使用者手机号码"
+              v-model="phone"
+            />
+          </div>
+        </div>
+        <div>
+          <div class="title"><span>*</span>验证码</div>
+          <div class="registerInput">
+            <input
+              type="text"
+              placeholder="短信验证码"
+              class="note"
+              v-model="code"
+            />
+            <div class="verify" @click="verify" :class="[noteVerify==false?'green':'gray']">{{ noteText }}</div>
+          </div>
+        </div>
+        <div></div>
+        <div class="putinBtn" @click='next'>
+          提交审核
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="../js/vue.js"></script>
+  <script src="../js/vant.js"></script>
+  <script src="../js/axios.js"></script>
+  <script>
+    var app = new Vue({
+      el: "#app",
+      data: {
+        noteVerify: false,
+        noteText: "获取验证码",
+        noteNum: 60,
+        
+        code: "", //验证码
+        phone: "", //手机号码
+        account: "", //用户账号
+        password: "", //密码
+        passwords: "" //二次密码
+      },
+      methods: {
+        next() {
+      var phones = /^1[34578]\d{9}$/; //手机号码格式验证
+      var kong = /\s/; //含有空格正则
+      var hanzi=/[\u4E00-\u9FA5]/;
+    
+      if(kong.test(this.account)||this.account.length<6||this.account.length>20){
+           this.$message({
+                message:'输入的账号格式不正确',
+                type:'warning'
+            })
+      }else if(hanzi.test(this.account)||this.account.length<6||this.account.length>20){
+          this.$message({
+                message:'账号只能由数子或英文组成',
+                type:'warning'
+            })
+      }else if(kong.test(this.password)||this.password.length<6||this.password.length>20){
+          this.$message({
+                message:'输入的密码格式不正确',
+                type:'warning'
+            })
+      }else if(hanzi.test(this.password)||this.password.length<6||this.password.length>20){
+
+      }else if(this.password!==this.passwords){
+          this.$message({message: '两次输入密码不一致',type: 'warning'});
+      }else if(!phones.test(this.phone)){
+          this.$message({
+                message:'输入的手机号码格式不对',
+                type:'warning'
+            })
+      }else if(kong.test(this.code)||this.code.length<4){
+          this.$message({
+                message:'请输入验证码',
+                type:'warning'
+            })
+      }else{
+         let params=new URLSearchParams();
+         params.append('phone',this.phone);
+         params.append('code',this.code );
+         params.append('landingaccount',this.account);
+         params.append('landingpassword',this.password);
+         this.axios({
+           method:'post',
+          url:'http://192.168.10.158:8082/api/v1/pc/merchantlogin/register',
+          data:params
+         }).then((res)=>{
+          //  console.log(res)
+           if(res.data.code==0){
+             localStorage.setItem('Access_token',res.data.data.accessToken)
+             this.$message({
+               message:'注册'+res.data.msg+'',
+               type:'success'
+             })
+            //  this.$router.push({name:'home'})
+           }else if(res.data.code==233){
+              this.$message({
+               message:''+res.data.msg+'',
+               type:'error'
+             })
+           }else if(res.data.code==207){
+              this.$message({
+               message:''+res.data.msg+'',
+               type:'error'
+             })
+           }else if(res.data.code==807){
+              this.$message({
+               message:''+res.data.msg+'',
+               type:'error'
+             })
+           }
+         })
+          
+      }
+    },
+        verify() {
+          var phones = /^1[34578]\d{9}$/;
+          if (!phones.test(this.phone)) {
+            this.$message({
+              message: "输入的手机号码格式不对",
+              type: "warning"
+            });
+          } else {
+            // let params = new URLSearchParams();
+            // params.append("phone", this.phone);
+            // this.axios({
+            //   method: "post",
+            //   url: "http://192.168.10.158:8082/api/v1/pc/merchantlogin/existsms",
+            //   data: params
+            // }).then(res => {});
+            var t = setInterval(() => {
+              if (this.noteNum > 0) {
+                // this.axios.post();
+                this.noteNum = this.noteNum - 1;
+                
+                this.noteVerify = true;
+                this.noteText = this.noteNum + "s";
+              } else {
+                clearInterval(t);
+                
+                this.noteVerify = false;
+                this.noteText = "重新获取验证码";
+                this.noteNum = 60;
+              }
+            }, 1000);
+          }
+        }
+      }
+    });
+  </script>
+</html>

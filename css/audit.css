@@ -1,0 +1,35 @@
+.audit>div{
+    width: 90%;
+    margin: 0 auto;
+}
+
+.auditImg{
+    width: 10rem;
+    height: 10rem;
+    background: bisque;
+    margin: 0 auto;
+    margin-top: 5rem;
+}
+.auditTitle{
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 2rem;
+}
+.audittext{
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 0.5rem;
+}
+.auditBtn{
+    width: 96%;
+    margin: 0 auto;
+    height: 3rem;
+    text-align: center;
+    line-height: 3rem;
+    background: #0CD4D3;
+    color: white;
+    border-radius: 0.5rem;
+    margin-top: 5rem;
+}
