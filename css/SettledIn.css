@@ -1,7 +1,10 @@
 *{
     padding: 0;
     margin: 0;
-}s
+}
+[v-cloak]{
+    display:none;
+}
 html{
     background: #F1F1F1;
 }
