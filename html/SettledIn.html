@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../css/meitichaxun.css">
+    <link rel="stylesheet" href="../css/element.css">
+    <link rel="stylesheet" href="../css/SettledIn.css">
+    <title>入驻</title>
+</head>
+<body>
+    <div id="app">
+        <div class="centerBox">
+            <div class="dddddd">
+                <p><span class="span">*</span>店铺名称</p>
+                <input type="text" placeholder="输入店铺名称" class="inputs">
+            </div>
+            <div class="dddddd">
+                <p><span class="span">*</span>姓名</p>
+                <input type="text" placeholder="请输入开店人的真实姓名" class="inputs">
+            </div>
+            <div class="dddddd">
+                <p><span class="span">*</span>手机号</p>
+                <input type="text" placeholder="请输入经营者手机号" class="inputs">
+            </div>
+            <div class="dddddd">
+                <p><span class="span">*</span>身份证号</p>
+                <input type="text" placeholder="请输入开店人的身份证号码" class="inputs">
+            </div>
+            <div class="dddddd">
+                    <p style="margin-bottom:1rem;"><span class="span">*</span>上传证件</p>
+                    <div class="imgblog">
+                        <div class="upImg">
+                            <span v-if="onesrc.length==0">身份证正面</span>
+                            <img :src="onesrc" v-if="onesrc.length!=0" >
+                            <input type="file" class="dsfafd" @change="getFile"  multiple accept="image/png,image/jpeg,image/gif,image/jpg" id="file">
+                            <label for="file" class="upImgbtn" v-if="onesrc.length==0" >点击上传</label>
+                            <label for="file" class="upseccs" v-else >上传成功</label>
+                        </div>
+                        <div class="upImg">
+                                <span v-if="trwosrc.length==0">身份证背面</span>
+                               <img :src="trwosrc" v-if="trwosrc.length!=0" >
+                              <input type="file" class="dsfafd" @change="getFiless"  multiple accept="image/png,image/jpeg,image/gif,image/jpg" id="files">
+                              <label for="files" class="upImgbtn" v-if="trwosrc.length==0" >点击上传</label>
+                              <label for="files" class="upseccs" v-else >上传成功</label>
+                        </div>
+                    </div>
+            </div>
+            <div class="dddddd">
+                <p><span class="span">*</span>证件有效期</p>
+                <div class="imgblog">   
+                                <el-date-picker
+                                  v-model="years"
+                                  type="date"
+                                  format="yyyy-mm-dd"
+                                  value-format="yyyy-mm-dd"
+                                  placeholder="选择日期">
+                                </el-date-picker>
+                        
+                        <el-checkbox v-model="yeartime">长期</el-checkbox>
+                </div>
+            </div>
+            <div class="dddddd">
+                <p><span class="span">*</span>注册号/信用码</p>
+                <input type="text" placeholder="请输入营业执照上的注册号或统一社会信用代码" class="inputs">
+            </div>
+            <div class="dddddd">
+                <p><span class="span">*</span>执照名称</p>
+                <input type="text" placeholder="营业执照“名称”一栏的内容" class="inputs">
+            </div>
+            <div class="dddddd">
+                <p><span class="span">*</span>法人姓名</p>
+                <input type="text" placeholder="营业执照上法人或经营者姓名" class="inputs">
+            </div>
+            <div class="dddddd">
+                    <p><span class="span">*</span>营业有效期</p>
+                    <div class="imgblog">   
+                        <el-date-picker
+                            v-model="yeartimes"
+                            type="date"
+                            format="yyyy-mm-dd"
+                            value-format="yyyy-mm-dd"
+                            placeholder="选择日期">
+                        </el-date-picker> 
+                        <el-checkbox v-model="yeartime">长期</el-checkbox>
+                    </div>
+            </div>
+            <div class="dddddd">
+                <p><span class="span">*</span>营业执照</p>
+                <div class="imgblog">   
+                    <div class="upImg">
+                        <span v-if="strwisrc.length==0">工商营业执照</span>
+                        <img :src="strwisrc" v-if="strwisrc.length!=0" >
+                        <input type="file" class="dsfafd" @change="getFilesss"  multiple accept="image/png,image/jpeg,image/gif,image/jpg" id="filesss">
+                        <label for="filesss" class="upImgbtn" v-if="strwisrc.length==0" >点击上传</label>
+                        <label for="filesss" class="upseccs" v-else >上传成功</label>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>      
+
+    </div>
+</body>
+<script src="../js/vue.js"></script>
+<script src="../js/element.js"></script>
+<script src="../js/axios.js"></script>
+<script>
+    var app = new Vue({
+        el:"#app",
+        data:{
+            shopName:"",
+            onesrc:[],//身份证正面
+            trwosrc:[],//身份证背面面
+            strwisrc:[],//营业执照照片
+            years:'',//身份证件期限
+            yearss:'',//营业证件期限
+            yeartime:false,//身份证是否长期
+            yeartimes:false,//营业执照是否长期
+        },
+        methods:{
+            getFile(e){
+                let _this = this
+                var files = e.target.files[0]
+                if (!e || !window.FileReader) return 
+                    let reader = new FileReader()
+                    reader.readAsDataURL(files) 
+                    reader.onloadend = function () {
+                    _this.onesrc = this.result
+                }
+            },
+            getFiless(e){
+                let _this = this
+                var files = e.target.files[0]
+                if (!e || !window.FileReader) return 
+                    let reader = new FileReader()
+                    reader.readAsDataURL(files) 
+                    reader.onloadend = function () {
+                    _this.trwosrc = this.result
+                }
+            },
+            getFilesss (e) {
+                let _this = this
+                var filesss = e.target.files[0]
+                if (!e || !window.FileReader) return 
+                    let readersss = new FileReader()
+                    readersss.readAsDataURL(filesss)
+                    readersss.onloadend = function () {
+                    _this.strwisrc = this.result
+                }
+               
+                
+            }
+        }
+    })
+
+</script>
+</html>
