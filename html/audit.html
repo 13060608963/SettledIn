@@ -9,9 +9,10 @@
     <title>提交成功</title>
   </head>
   <body>
-    <div class="audit" v-cloak>
+    <div class="audit">
+            <div class="head"><div class="headReturn" @click='headReturn'><img src="../img/left.png" alt=""></div>提交成功</div>
       <div>
-        <div class="auditImg"><img src="" alt=""></div>
+        <div class="auditImg"><img src="../img/audit.png" alt=""></div>
         <div class="auditTitle">入驻信息提交成功</div>
         <div class="audittext">店铺审核将在七个工作日内完成，请耐心等待</div>
         <div class="auditBtn">返回主页</div>
@@ -22,7 +23,11 @@
   <script>
     var app = new Vue({
       data: {},
-      methods: {}
+      methods: {
+        headReturn(){
+          
+        }
+      }
     });
   </script>
 </html>
