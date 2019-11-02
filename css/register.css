@@ -1,3 +1,7 @@
+body{
+    margin: 0;
+    padding: 0;
+}
 #app {
   width: 100%;
 }
@@ -9,7 +13,7 @@
   width: 100%;
 }
 .register > div > div {
-  margin-top: 0.5rem;
+  margin-top: 0.7rem;
 }
 .registerInput {
   border-bottom: 0.1rem #f1f1f1 solid;
@@ -69,4 +73,8 @@
 }
 .gray{
     color: #9597A6;
+}
+.el-message{
+    min-width:0;
+    width: 80%;
 }
