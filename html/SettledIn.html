@@ -1,495 +1,508 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="../css/meitichaxun.css">
-    <link rel="stylesheet" href="../css/element.css">
-    <link rel="stylesheet" href="../css/SettledIn.css">
-    <link rel="stylesheet" href="../css/audit.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="../css/meitichaxun.css" />
+    <link rel="stylesheet" href="../css/element.css" />
+    <link rel="stylesheet" href="../css/SettledIn.css" />
+    <link rel="stylesheet" href="../css/audit.css" />
     <title>入驻</title>
-</head>
-<body>
+  </head>
+  <body>
     <div id="app" v-cloak>
-            <div class="head"><div class="headReturn" @click='headReturn'><img src="../img/left.png" alt=""></div>提交成功</div>
-        <div class="centerBox">
-            <div class="dddddd">
-                <p><span class="span">*</span>店铺名称</p>
-                <input type="text" placeholder="输入店铺名称" class="inputs" v-model="shopName">
+      <div class="head">
+        <div class="headReturn" @click="headReturn">
+          <img src="../img/left.png" alt="" />
+        </div>
+        填写信息
+      </div>
+      <div class="centerBox">
+        <div class="dddddd">
+          <p><span class="span">*</span>店铺名称</p>
+          <input
+            type="text"
+            placeholder="输入店铺名称"
+            class="inputs"
+            v-model="shopName"
+          />
+        </div>
+        <div class="dddddd">
+          <p><span class="span">*</span>姓名</p>
+          <input
+            type="text"
+            placeholder="请输入开店人的真实姓名"
+            class="inputs"
+            v-model="name"
+          />
+        </div>
+        <div class="dddddd">
+          <p><span class="span">*</span>手机号</p>
+          <input
+            type="text"
+            placeholder="请输入经营者手机号"
+            class="inputs"
+            v-model="phonenumber"
+          />
+        </div>
+        <div class="dddddd">
+          <p><span class="span">*</span>身份证号</p>
+          <input
+            type="text"
+            placeholder="请输入开店人的身份证号码"
+            class="inputs"
+            v-model="idnumber"
+          />
+        </div>
+        <div class="dddddd qudiao">
+          <p style="margin-bottom:1rem;"><span class="span">*</span>上传证件</p>
+          <div class="imgblog">
+            <div class="upImg">
+              <span v-if="onesrc.length==0">身份证正面</span>
+              <img :src="onesrc" v-if="onesrc.length!=0" />
+              <input
+                type="file"
+                class="dsfafd"
+                @change="getFile"
+                multiple
+                accept="image/png,image/jpeg,image/gif,image/jpg"
+                id="file"
+              />
+              <label for="file" class="upImgbtn" v-if="onesrc.length==0"
+                >点击上传</label
+              >
+              <label for="file" class="upseccs" v-else>上传成功</label>
             </div>
-            <div class="dddddd">
-                <p><span class="span">*</span>姓名</p>
-                <input type="text" placeholder="请输入开店人的真实姓名" class="inputs" v-model="name">
+            <div class="upImg">
+              <span v-if="trwosrc.length==0">身份证背面</span>
+              <img :src="trwosrc" v-if="trwosrc.length!=0" />
+              <input
+                type="file"
+                class="dsfafd"
+                @change="getFiless"
+                multiple
+                accept="image/png,image/jpeg,image/gif,image/jpg"
+                id="files"
+              />
+              <label for="files" class="upImgbtn" v-if="trwosrc.length==0"
+                >点击上传</label
+              >
+              <label for="files" class="upseccs" v-else>上传成功</label>
             </div>
-            <div class="dddddd">
-                <p><span class="span">*</span>手机号</p>
-                <input type="text" placeholder="请输入经营者手机号" class="inputs" v-model="phonenumber">
+          </div>
+        </div>
+        <div class="dddddd qudiao">
+          <p><span class="span">*</span>证件有效期</p>
+          <div class="imgblog">
+            <el-date-picker
+              v-model="years"
+              type="date"
+              format="yyyy-mm-dd"
+              value-format="yyyy-mm-dd"
+              placeholder="选择日期"
+            >
+            </el-date-picker>
+            <el-checkbox v-model="yeartime">长期</el-checkbox>
+          </div>
+        </div>
+        <div class="dddddd">
+          <p><span class="span">*</span>注册号/信用码</p>
+          <input
+            type="text"
+            placeholder="请输入营业执照上的注册号或统一社会信用代码"
+            class="inputs"
+            v-model="resourcenumber"
+          />
+        </div>
+        <div class="dddddd">
+          <p><span class="span">*</span>执照名称</p>
+          <input
+            type="text"
+            placeholder="营业执照“名称”一栏的内容"
+            class="inputs"
+            v-model="resourcename"
+          />
+        </div>
+        <div class="dddddd">
+          <p><span class="span">*</span>法人姓名</p>
+          <input
+            type="text"
+            placeholder="营业执照上法人或经营者姓名"
+            class="inputs"
+            v-model="legalperson"
+          />
+        </div>
+        <div class="dddddd qudiao">
+          <p><span class="span">*</span>营业有效期</p>
+          <div class="imgblog">
+            <el-date-picker
+              v-model="yearss"
+              type="date"
+              format="yyyy-mm-dd"
+              value-format="yyyy-mm-dd"
+              placeholder="选择日期"
+            >
+            </el-date-picker>
+            <el-checkbox v-model="yeartimes">长期</el-checkbox>
+          </div>
+        </div>
+        <div class="dddddd qudiao">
+          <p><span class="span">*</span>营业执照</p>
+          <div class="imgblog">
+            <div class="upImg">
+              <span v-if="strwisrc.length==0">工商营业执照</span>
+              <img :src="strwisrc" v-if="strwisrc.length!=0" />
+              <input
+                type="file"
+                class="dsfafd"
+                @change="getFilesss"
+                multiple
+                accept="image/png,image/jpeg,image/gif,image/jpg"
+                id="filesss"
+              />
+              <label for="filesss" class="upImgbtn" v-if="strwisrc.length==0"
+                >点击上传</label
+              >
+              <label for="filesss" class="upseccs" v-else>上传成功</label>
             </div>
-            <div class="dddddd">
-                <p><span class="span">*</span>身份证号</p>
-                <input type="text" placeholder="请输入开店人的身份证号码" class="inputs" v-model="idnumber">
-            </div>
-            <div class="dddddd qudiao">
-                    <p style="margin-bottom:1rem;"><span class="span">*</span>上传证件</p>
-                    <div class="imgblog">
-                        <div class="upImg">
-                            <span v-if="onesrc.length==0">身份证正面</span>
-                            <img :src="onesrc" v-if="onesrc.length!=0" >
-                            <input type="file" class="dsfafd" @change="getFile"  multiple accept="image/png,image/jpeg,image/gif,image/jpg" id="file">
-                            <label for="file" class="upImgbtn" v-if="onesrc.length==0" >点击上传</label>
-                            <label for="file" class="upseccs" v-else >上传成功</label>
-                        </div>
-                        <div class="upImg">
-                                <span v-if="trwosrc.length==0">身份证背面</span>
-                               <img :src="trwosrc" v-if="trwosrc.length!=0" >
-                              <input type="file" class="dsfafd" @change="getFiless"  multiple accept="image/png,image/jpeg,image/gif,image/jpg" id="files">
-                              <label for="files" class="upImgbtn" v-if="trwosrc.length==0" >点击上传</label>
-                              <label for="files" class="upseccs" v-else >上传成功</label>
-                        </div>
-                    </div>
-            </div>
-            <div class="dddddd qudiao">
-                <p><span class="span">*</span>证件有效期</p>
-                <div class="imgblog">   
-                    <el-date-picker
-                        v-model="years"
-                        type="date"
-                        format="yyyy-mm-dd"
-                        value-format="yyyy-mm-dd"
-                        placeholder="选择日期">
-                        </el-date-picker>
-                    <el-checkbox v-model="yeartime">长期</el-checkbox>
-                </div>
-            </div>
-            <div class="dddddd">
-                <p><span class="span">*</span>注册号/信用码</p>
-                <input type="text" placeholder="请输入营业执照上的注册号或统一社会信用代码" class="inputs" v-model="resourcenumber">
-            </div>
-            <div class="dddddd">
-                <p><span class="span">*</span>执照名称</p>
-                <input type="text" placeholder="营业执照“名称”一栏的内容" class="inputs" v-model="resourcename">
-            </div>
-            <div class="dddddd">
-                <p><span class="span">*</span>法人姓名</p>
-                <input type="text" placeholder="营业执照上法人或经营者姓名" class="inputs" v-model="legalperson">
-            </div>
-            <div class="dddddd qudiao">
-                    <p><span class="span">*</span>营业有效期</p>
-                    <div class="imgblog">   
-                        <el-date-picker
-                            v-model="yeartimes"
-                            type="date"
-                            format="yyyy-mm-dd"
-                            value-format="yyyy-mm-dd"
-                            placeholder="选择日期">
-                        </el-date-picker> 
-                        <el-checkbox v-model="yeartime">长期</el-checkbox>
-                    </div>
-            </div>
-            <div class="dddddd qudiao">
-                <p><span class="span">*</span>营业执照</p>
-                <div class="imgblog">   
-                    <div class="upImg">
-                        <span v-if="strwisrc.length==0">工商营业执照</span>
-                        <img :src="strwisrc" v-if="strwisrc.length!=0" >
-                        <input type="file" class="dsfafd" @change="getFilesss"  multiple accept="image/png,image/jpeg,image/gif,image/jpg" id="filesss">
-                        <label for="filesss" class="upImgbtn" v-if="strwisrc.length==0" >点击上传</label>
-                        <label for="filesss" class="upseccs" v-else >上传成功</label>
-                    </div>
-                </div>
-            </div>
-            <div class="ReturnButton">
-                    <div class="ButtonDiv">
-                      <button class="Establish" @click="creatshop">提交审核</button>
-                    </div>
-            </div>
-
-
-        </div>      
-
+          </div>
+        </div>
+        <div class="ReturnButton">
+          <div class="ButtonDiv">
+            <button class="Establish" @click="creatshop">提交审核</button>
+          </div>
+        </div>
+      </div>
     </div>
-</body>
-<script src="../js/vue.js"></script>
-<script src="../js/element.js"></script>
-<script src="../js/axios.js"></script>
-<script>
+  </body>
+  <script src="../js/vue.js"></script>
+  <script src="../js/element.js"></script>
+  <script src="../js/axios.js"></script>
+  <script>
     var app = new Vue({
-        el:"#app",
-        data:{
-            onesrc:[],//身份证正面
-            trwosrc:[],//身份证背面面
-            strwisrc:[],//营业执照照片
-            yeartime:false,//身份证是否长期
-            yeartimes:false,//营业执照是否长期
-            phonenumber:'',//手机号码
-            shopName:'',//店铺名称
-            years:'',//身份证件期限
-            yearss:'',//营业证件期限
-            name:'',//姓名
-            idnumber:'',//身份证号码
-            resourcenumber:'',//注册号/信用代码
-            resourcename:'',//执照名称
-            legalperson:'',//法人
-            onesrcurl:'',//身份证正面照url 
-            trwosrcurl:'',//身份证背面照url
-            strwisrcurl:'',//营业执照url
-            numid:'',
-            url:'http://192.168.10.158:8082/api/v1'
+      el: "#app",
+      data: {
+        onesrc: [], //身份证正面
+        trwosrc: [], //身份证背面面
+        strwisrc: [], //营业执照照片
+        yeartime: false, //身份证是否长期
+        yeartimes: false, //营业执照是否长期
+        phonenumber: "", //手机号码
+        shopName: "", //店铺名称
+        years: "", //身份证件期限
+        yearss: "", //营业证件期限
+        name: "", //姓名
+        idnumber: "", //身份证号码
+        resourcenumber: "", //注册号/信用代码
+        resourcename: "", //执照名称
+        legalperson: "", //法人
+        onesrcurl: "", //身份证正面照url
+        trwosrcurl: "", //身份证背面照url
+        strwisrcurl: "", //营业执照url
+        url: "http://192.168.10.158:8082/api/v1",
+        paramsurl: []
+      },
+      created() {
+        var url = location.search; //获取url中"?"符后的字串
+        var theRequest = new Object();
+        if (url.indexOf("?") !== -1) {
+          var str = url.substr(1);
+          strs = str.split("&");
+          for (var i = 0; i < strs.length; i++) {
+            theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+          }
+          this.paramsurl = theRequest;
+          console.log(this.paramsurl);
+        }
+      },
+      methods: {
+        panduan(codes){
+          if (codes == 0) {
+                    this.$message({
+                      message: "提交信息成功",
+                      type: "success"
+                    });
+                    setTimeout(() => {
+                      window.location.href = "./audit.html";
+                    }, 1000);
+                  } else if(codes == 807){
+                    this.$message({
+                      message: "用户已存在",
+                      type: "warning"
+                    });
+                  }else if(codes == 233){
+                    this.$message({
+                      message: "手机号码已绑定",
+                      type: "warning"
+                    });
+                  }else if(codes == 207){
+                    this.$message({
+                      message: "无效的验证码",
+                      type: "warning"
+                    });
+                  }else if(codes == 311){
+                    this.$message({
+                      message: "信息已存在",
+                      type: "warning"
+                    });
+                  }
+                  else if(codes == 201){
+                    this.$message({
+                      message: "填写信息错误",
+                      type: "warning"
+                    });
+                  }
         },
-        methods:{
-            comback(){
-     window.history.back(-1)
-   },
-            creatshop(){
-     var kong = /\s/;//含有空格正则
-     var phones = /^1[34578]\d{9}$/;//手机正则
-     var xing = /^[\u4E00-\u9FA5\uf900-\ufa2d·s]{2,20}$/;//中文姓名正则
-     if(this.shopName.length==0||kong.test(this.shopName)){
-        this.$message({message: '店铺名称含有为空格或者为空',type: 'warning'});
-     }else if(!xing.test(this.name)){
-          this.$message({message: '姓名含有为空格或者为空',type: 'warning'});
-     }else if(!phones.test(this.phonenumber)){
-        this.$message({message: '手机号码格式不正确',type: 'warning'});
-     }else if(this.idnumber.length!=18||kong.test(this.idnumber)){
-        this.$message({message: '身份证号码输入错误',type: 'warning'});
-     }else if(this.onesrc.length==0||this.trwosrc.length==0){
-            this.$message({message: '请上传完整的身份证图片',type: 'warning'});
-     }else if(this.strwisrc.length==0){
-            this.$message({message: '请上传营业执照图片',type: 'warning'});
-     }else if(this.resourcenumber.length==0||kong.test(this.resourcenumber)){
-            this.$message({message: '注册号／信用代码含有为空格或者为空',type: 'warning'});
-     }else if(this.resourcename.length==0||kong.test(this.resourcename)){
-            this.$message({message: '执照名称含有为空格或者为空',type: 'warning'});
-     }else if(!xing.test(this.legalperson)){
-            this.$message({message: '法人姓名格式不正确',type: 'warning'});
-     }else if(!this.yeartime){
-        if(this.years.length==""){
-          this.$message({message: '身份证年限为空',type: 'warning'});
-        }else if(!this.yeartimes){
-            if(this.yearss.length==''){
-              this.$message({message: '营业执照年限为空',type: 'warning'});
-            }else{
-              //身份证不为长期且营业执照不为长期
-                let params = new URLSearchParams;
-                params.append('businessname',this.resourcename);
-                params.append('idcard',this.idnumber);
-                params.append('idcardimgx',this.onesrcurl);
-                params.append('idcardimgy',this.trwosrcurl);
-                params.append('idcardtermofvalidity',this.years);
-                params.append('licensedate',this.yearss);
-                params.append('licensepositive',this.strwisrcurl);
-                params.append('longtermcertificate',this.yeartime);
-                params.append('longtermlicense',this.yeartimes);
-                params.append('nameoflegalperson',this.legalperson);
-                params.append('phone',this.phonenumber);
-                params.append('realname',this.name);
-                params.append('shopname',this.shopName);
-                params.append('businesslicensenumber',this.resourcenumber);
-                  // console.log(this.numid)
-                if(!this.numid){
-                    // console.log(1)
-                    axios({
-                      method:'post',
-                      url:''+this.url+'/pc/merchantsettledin/entryInformation',
-                      headers: { 
-                        'Access-token' : localStorage.getItem('Access_token')
-                      },
-                      data:params
-                    }).then((res)=>{
-                      console.log(res.data)
-                      if(res.data.code==0){
-                        this.$message({
-                          message:"提交信息成功",
-                          type:'success'
-                        });
-                        setTimeout(() => {
-                          this.$router.push({name:"flagShip"})
-                        }, 1000);
-                      }else{
-                        this.$message({
-                          message:"登录失败",
-                          type:'warning'
-                        });
-                      }
-                    })
-                }else{
-                    axios({
-                      method:'post',
-                      url:''+this.url+'/pc/merchantsettledin/updEntryInformation',
-                      headers: { 
-                        'Access-token' : localStorage.getItem('Access_token')
-                      },
-                      data:params
-                    }).then((res)=>{
-                      console.log(res.data)
-                      if(res.data.code==0){
-                        this.$message({
-                          message:"提交信息成功",
-                          type:'success'
-                        });
-                        setTimeout(() => {
-                          this.$router.push({name:"flagShip"})
-                        }, 1000);
-                      }else{
-                        this.$message({
-                          message:"登录失败",
-                          type:'warning'
-                        });
-                      }
-                    })
-                }
-                
-            }
-        }else{
-            //身份证不为长期且营业执照为长期
+        comback() {
+          window.history.back(-1);
+        },
+        headReturn() {
+          window.location.href = "./login.html";
+        },
+        creatshop() {
+          var kong = /\s/; //含有空格正则
+          var phones = /^1[34578]\d{9}$/; //手机正则
+          var xing = /^[\u4E00-\u9FA5\uf900-\ufa2d·s]{2,20}$/; //中文姓名正则
+          if (this.shopName.length == 0 || kong.test(this.shopName)) {
+            this.$message({
+              message: "店铺名称含有为空格或者为空",
+              type: "warning"
+            });
+          } else if (!xing.test(this.name)) {
+            this.$message({
+              message: "姓名含有为空格或者为空",
+              type: "warning"
+            });
+          } else if (!phones.test(this.phonenumber)) {
+            this.$message({ message: "手机号码格式不正确", type: "warning" });
+          } else if (this.idnumber.length != 18 || kong.test(this.idnumber)) {
+            this.$message({ message: "身份证号码输入错误", type: "warning" });
+          } else if (this.onesrc.length == 0 || this.trwosrc.length == 0) {
+            this.$message({
+              message: "请上传完整的身份证图片",
+              type: "warning"
+            });
+          } else if (this.strwisrc.length == 0) {
+            this.$message({ message: "请上传营业执照图片", type: "warning" });
+          } else if (
+            this.resourcenumber.length == 0 ||
+            kong.test(this.resourcenumber)
+          ) {
+            this.$message({
+              message: "注册号／信用代码含有为空格或者为空",
+              type: "warning"
+            });
+          } else if (
+            this.resourcename.length == 0 ||
+            kong.test(this.resourcename)
+          ) {
+            this.$message({
+              message: "执照名称含有为空格或者为空",
+              type: "warning"
+            });
+          } else if (!xing.test(this.legalperson)) {
+            this.$message({ message: "法人姓名格式不正确", type: "warning" });
+          } else if (!this.yeartime) {
+            if (this.years.length == "") {
+              this.$message({ message: "身份证年限为空", type: "warning" });
+            } else if (!this.yeartimes) {
+              if (this.yearss.length == "") {
+                this.$message({ message: "营业执照年限为空", type: "warning" });
+              } else {
+                //身份证不为长期且营业执照不为长期
+                let params = new URLSearchParams();
+                params.append("businessname", this.resourcename);
+                params.append("idcard", this.idnumber);
+                params.append("idcardimgx", this.onesrcurl);
+                params.append("idcardimgy", this.trwosrcurl);
+                params.append("idcardtermofvalidity", this.years);
+                params.append("licensedate", this.yearss);
+                params.append("licensepositive", this.strwisrcurl);
+                params.append("longtermcertificate", this.yeartime);
+                params.append("longtermlicense", this.yeartimes);
+                params.append("nameoflegalperson", this.legalperson);
+                params.append("phone", this.phonenumber);
+                params.append("realname", this.name);
+                params.append("shopname", this.shopName);
+                params.append("businesslicensenumber", this.resourcenumber);
 
-               let params = new URLSearchParams;
-                params.append('businessname',this.resourcename);
-                params.append('idcard',this.idnumber);
-                params.append('idcardimgx',this.onesrcurl);
-                params.append('idcardimgy',this.trwosrcurl);
-                params.append('idcardtermofvalidity',this.years);
-                params.append('licensedate',"");
-                params.append('licensepositive',this.strwisrcurl);
-                params.append('longtermcertificate',this.yeartime);
-                params.append('longtermlicense',this.yeartimes);
-                params.append('nameoflegalperson',this.legalperson);
-                params.append('phone',this.phonenumber);
-                params.append('realname',this.name);
-                params.append('shopname',this.shopName);
-                params.append('businesslicensenumber',this.resourcenumber);
-                
-                if(!this.numid){
-                    axios({
-                      method:'post',
-                      url:''+this.url+'/pc/merchantsettledin/entryInformation',
-                      headers: { 
-                        'Access-token' : localStorage.getItem('Access_token')
-                      },
-                      data:params
-                    }).then((res)=>{
-                      if(res.data.code==0){
-                        this.$message({
-                          message:"提交信息成功",
-                          type:'success'
-                        });
-                        setTimeout(() => {
-                          this.$router.push({name:"flagShip"})
-                        }, 1000);
-                      }else{
-                        this.$message({
-                          message:"登录失败",
-                          type:'warning'
-                        });
-                      }
-                    })
-                }else{
-                    axios({
-                      method:'post',
-                      url:''+this.url+'/pc/merchantsettledin/updEntryInformation',
-                      headers: { 
-                        'Access-token' : localStorage.getItem('Access_token')
-                      },
-                      data:params
-                    }).then((res)=>{
-                      if(res.data.code==0){
-                        this.$message({
-                          message:"提交信息成功",
-                          type:'success'
-                        });
-                        setTimeout(() => {
-                          this.$router.push({name:"flagShip"})
-                        }, 1000);
-                      }else{
-                        this.$message({
-                          message:"登录失败",
-                          type:'warning'
-                        });
-                      }
-                    })
-                }
-        }
-          
-        
-     }else{
-       if(!this.yeartimes){
-            if(this.yearss.length==''){
-              this.$message({message: '营业执照年限为空',type: 'warning'});
-            }else{
+                params.append("landingaccount", this.paramsurl.landingaccount);
+                params.append("landingpassword", this.paramsurl.landingpassword);
+                params.append("code", this.paramsurl.code);
+                params.append("moli", this.paramsurl.phones);
+                axios({
+                  method: "post",
+                  url: "" + this.url + "/app/merchantLogin/register",
+                  data: params
+                }).then(res => {
+
+                  this.panduan(res.data.code);
+                });
+              }
+            } else {
+              //身份证不为长期且营业执照为长期
+
+              let params = new URLSearchParams();
+              params.append("businessname", this.resourcename);
+              params.append("idcard", this.idnumber);
+              params.append("idcardimgx", this.onesrcurl);
+              params.append("idcardimgy", this.trwosrcurl);
+              params.append("idcardtermofvalidity", this.years);
+              params.append("licensedate", "");
+              params.append("licensepositive", this.strwisrcurl);
+              params.append("longtermcertificate", this.yeartime);
+              params.append("longtermlicense", this.yeartimes);
+              params.append("nameoflegalperson", this.legalperson);
+              params.append("phone", this.phonenumber);
+              params.append("realname", this.name);
+              params.append("shopname", this.shopName);
+              params.append("businesslicensenumber", this.resourcenumber);
+
+              params.append("landingaccount", this.paramsurl.landingaccount);
+                params.append("landingpassword", this.paramsurl.landingpassword);
+                params.append("code", this.paramsurl.code);
+                params.append("moli", this.paramsurl.phones);
+              axios({
+                method: "post",
+                url: "" + this.url + "/app/merchantLogin/register",
+                data: params
+              }).then(res => {
+                this.panduan(res.data.code);
+              });
+            }
+          } else {
+            if (!this.yeartimes) {
+              if (this.yearss.length == "") {
+                this.$message({ message: "营业执照年限为空", type: "warning" });
+              } else {
                 //身份证为长期且营业执照不为长期
-                 let params = new URLSearchParams;
-                params.append('businessname',this.resourcename);
-                params.append('idcard',this.idnumber);
-                params.append('idcardimgx',this.onesrcurl);
-                params.append('idcardimgy',this.trwosrcurl);
-                params.append('idcardtermofvalidity',"");
-                params.append('licensedate',this.yearss);
-                params.append('licensepositive',this.strwisrcurl);
-                params.append('longtermcertificate',this.yeartime);
-                params.append('longtermlicense',this.yeartimes);
-                params.append('nameoflegalperson',this.legalperson);
-                params.append('phone',this.phonenumber);
-                params.append('realname',this.name);
-                params.append('shopname',this.shopName);
-                params.append('businesslicensenumber',this.resourcenumber);
-                if(!this.numid){
-                    axios({
-                      method:'post',
-                      url:''+this.url+'/pc/merchantsettledin/entryInformation',
-                      headers: { 
-                        'Access-token' : localStorage.getItem('Access_token')
-                      },
-                      data:params
-                    }).then((res)=>{
-                      if(res.data.code==0){
-                        this.$message({
-                          message:"提交信息成功",
-                          type:'success'
-                        });
-                        setTimeout(() => {
-                          this.$router.push({name:"flagShip"})
-                        }, 1000);
-                      }else{
-                        this.$message({
-                          message:"登录失败",
-                          type:'warning'
-                        });
-                      }
-                    })
-                }else{
-                    axios({
-                      method:'post',
-                      url:''+this.url+'/pc/merchantsettledin/updEntryInformation',
-                      headers: { 
-                        'Access-token' : localStorage.getItem('Access_token')
-                      },
-                      data:params
-                    }).then((res)=>{
-                      if(res.data.code==0){
-                        this.$message({
-                          message:"提交信息成功",
-                          type:'success'
-                        });
-                        setTimeout(() => {
-                          this.$router.push({name:"flagShip"})
-                        }, 1000);
-                      }else{
-                        this.$message({
-                          message:"登录失败",
-                          type:'warning'
-                        });
-                      }
-                    })
-                }
-            
-            }
-                
-              
-        }else{
-               //身份证为长期且营业执照为长期
-               let params = new URLSearchParams;
-                params.append('businessname',this.resourcename);                                      
-                params.append('idcard',this.idnumber);
-                params.append('idcardimgx',this.onesrcurl);
-                params.append('idcardimgy',this.trwosrcurl);
-                params.append('idcardtermofvalidity',"");
-                params.append('licensedate',""); 
-                params.append('licensepositive',this.strwisrcurl);
-                params.append('longtermcertificate',this.yeartime);
-                params.append('longtermlicense',this.yeartimes);
-                params.append('nameoflegalperson',this.legalperson);
-                params.append('phone',this.phonenumber);
-                params.append('realname',this.name);
-                params.append('shopname',this.shopName);
-                params.append('businesslicensenumber',this.resourcenumber);
-                if(!this.numid){
-                    axios({
-                      method:'post',
-                      url:''+this.url+'/pc/merchantsettledin/entryInformation',
-                      headers: { 
-                        'Access-token' : localStorage.getItem('Access_token')
-                      },
-                      data:params
-                    }).then((res)=>{
-                      if(res.data.code==0){
-                        this.$message({
-                          message:"提交信息成功",
-                          type:'success'
-                        });
-                        setTimeout(() => {
-                          this.$router.push({name:"flagShip"})
-                        }, 1000);
-                      }else{
-                        this.$message({
-                          message:"登录失败",
-                          type:'warning'
-                        });
-                      }
-                    })
-                }else{
-                    axios({
-                      method:'post',
-                      url:''+this.url+'/pc/merchantsettledin/updEntryInformation',
-                      headers: { 
-                        'Access-token' : localStorage.getItem('Access_token')
-                      },
-                      data:params
-                    }).then((res)=>{
-                      if(res.data.code==0){
-                        this.$message({
-                          message:"提交信息成功",
-                          type:'success'
-                        });
-                        setTimeout(() => {
-                          this.$router.push({name:"flagShip"})
-                        }, 1000);
-                      }else{
-                        this.$message({
-                          message:"登录失败",
-                          type:'warning'
-                        });
-                      }
-                    })
-                }
-        }    
-     }
+                let params = new URLSearchParams();
+                params.append("businessname", this.resourcename);
+                params.append("idcard", this.idnumber);
+                params.append("idcardimgx", this.onesrcurl);
+                params.append("idcardimgy", this.trwosrcurl);
+                params.append("idcardtermofvalidity", "");
+                params.append("licensedate", this.yearss);
+                params.append("licensepositive", this.strwisrcurl);
+                params.append("longtermcertificate", this.yeartime);
+                params.append("longtermlicense", this.yeartimes);
+                params.append("nameoflegalperson", this.legalperson);
+                params.append("phone", this.phonenumber);
+                params.append("realname", this.name);
+                params.append("shopname", this.shopName);
+                params.append("businesslicensenumber", this.resourcenumber);
+                params.append("landingaccount", this.paramsurl.landingaccount);
+                params.append("landingpassword", this.paramsurl.landingpassword);
+                params.append("code", this.paramsurl.code);
+                params.append("moli", this.paramsurl.phones);
+                axios({
+                  method: "post",
+                  url: "" + this.url + "/app/merchantLogin/register",
+                  headers: {
+                    "Access-token": localStorage.getItem("Access_token")
+                  },
+                  data: params
+                }).then(res => {
+                  this.panduan(res.data.code);
+                });
+              }
+            } else {
+              //身份证为长期且营业执照为长期
+              let params = new URLSearchParams();
+              params.append("businessname", this.resourcename);
+              params.append("idcard", this.idnumber);
+              params.append("idcardimgx", this.onesrcurl);
+              params.append("idcardimgy", this.trwosrcurl);
+              params.append("idcardtermofvalidity", "");
+              params.append("licensedate", "");
+              params.append("licensepositive", this.strwisrcurl);
+              params.append("longtermcertificate", this.yeartime);
+              params.append("longtermlicense", this.yeartimes);
+              params.append("nameoflegalperson", this.legalperson);
+              params.append("phone", this.phonenumber);
+              params.append("realname", this.name);
+              params.append("shopname", this.shopName);
+              params.append("businesslicensenumber", this.resourcenumber);
+              params.append("landingaccount", this.paramsurl.landingaccount);
+                params.append("landingpassword", this.paramsurl.landingpassword);
+                params.append("code", this.paramsurl.code);
+                params.append("moli", this.paramsurl.phones);
+              axios({
+                method: "post",
+                url: "" + this.url + "/app/merchantLogin/register",
 
-   },
-            getFile(e){
-                let _this = this
-                var files = e.target.files[0]
-                if (!e || !window.FileReader) return 
-                    let reader = new FileReader()
-                    reader.readAsDataURL(files) 
-                    reader.onloadend = function () {
-                    _this.onesrc = this.result
+                data: params
+              }).then(res => {
+                this.panduan(res.data.code);
+              });
+            }
+          }
+        },
+        getFile(e) {
+          let _this = this;
+          var files = e.target.files[0];
+          let params = new FormData();
+            params.append('file',files,files.name);
+            axios({
+              method:'post',
+              url:''+this.url+'/pc/merchantsettledin/save.do',
+              data:params
+            }).then((res)=>{
+              if(res.data.code==0){
+                if (!e || !window.FileReader) return
+                let reader = new FileReader()
+                reader.readAsDataURL(files)
+                reader.onloadend = function () {
+                  _this.onesrc = this.result
+                  _this.onesrcurl = res.data.data.path
                 }
-            },
-            getFiless(e){
-                let _this = this
-                var files = e.target.files[0]
-                if (!e || !window.FileReader) return 
-                    let reader = new FileReader()
-                    reader.readAsDataURL(files) 
-                    reader.onloadend = function () {
-                    _this.trwosrc = this.result
-                }
-            },
-            getFilesss (e) {
-                let _this = this
-                var filesss = e.target.files[0]
-                if (!e || !window.FileReader) return 
-                    let readersss = new FileReader()
-                    readersss.readAsDataURL(filesss)
-                    readersss.onloadend = function () {
+              }
+            })
+        },
+        getFiless(e) {
+          let _this = this;
+          var filess = e.target.files[0];
+          let params = new FormData();
+          params.append('file',filess,filess.name);
+          axios({
+            method:'post',
+            url:''+this.url+'/pc/merchantsettledin/save.do',
+            data:params
+          }).then((res)=>{
+            if(res.data.code==0){
+                if (!e || !window.FileReader) return  // 看支持不支持FileReader
+                let readers = new FileReader()
+                readers.readAsDataURL(filess) // 这里是最关键的一步，转换就在这里
+                readers.onloadend = function () {
+                  _this.trwosrc = this.result
+                  _this.trwosrcurl=res.data.data.path
+              }
+            }
+          })
+        },
+        getFilesss(e) {
+          let _this = this;
+          var filesss = e.target.files[0];
+          let params = new FormData();
+            params.append('file',filesss,filesss.name);
+            axios({
+              method:'post',
+              url:''+this.url+'/pc/merchantsettledin/save.do',
+              data:params
+            }).then((res)=>{
+              if(res.data.code==0){
+                if (!e || !window.FileReader) return
+                  let readersss = new FileReader()
+                  readersss.readAsDataURL(filesss)
+                  readersss.onloadend = function () {
                     _this.strwisrc = this.result
+                    _this.strwisrcurl = res.data.data.path
                 }
-               
-                
-            }
+              }
+            })
         }
-    })
-
-</script>
+      }
+    });
+  </script>
 </html>

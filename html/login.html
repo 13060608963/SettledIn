@@ -11,7 +11,7 @@
   </head>
   <body>
     <div id="app" v-cloak>
-      <div class="head"><div class="headReturn" @click='headReturn'><img src="../img/left.png" alt=""></div>本地商家入驻</div>
+      <div class="head"><div class="headReturn" @click='headReturn'><img src="../img/left.png" alt=""></div>注册</div>
       <div class="interval"></div>
       <div class="register">
         <div>
@@ -77,7 +77,7 @@
         </div>
         <div></div>
         <div class="putinBtn" @click='next'>
-          注册
+          下一步
         </div>
       </div>
     </div>
@@ -96,7 +96,8 @@
         phone: "", //手机号码
         account: "", //用户账号
         password: "", //密码
-        passwords: "" //二次密码
+        passwords: "" ,//二次密码
+        url:'http://192.168.10.158:8082/api/v1',
       },
       methods: {
         next() {
@@ -134,41 +135,48 @@
                 type:'warning'
             })
       }else{
+        console.log(this.phone)
+
          let params=new URLSearchParams();
-         params.append('phone',this.phone);
+         params.append('codsse','');
          params.append('code',this.code );
          params.append('landingaccount',this.account);
          params.append('landingpassword',this.password);
-         axios({
-           method:'post',
-          url:'http://192.168.10.158:8082/api/v1/pc/merchantlogin/register',
-          data:params
-         }).then((res)=>{
-          //  console.log(res)
-           if(res.data.code==0){
-             localStorage.setItem('Access_token',res.data.data.accessToken)
-             this.$message({
-               message:'注册'+res.data.msg+'',
-               type:'success'
-             })
-            //  this.$router.push({name:'home'})
-           }else if(res.data.code==233){
-              this.$message({
-               message:''+res.data.msg+'',
-               type:'error'
-             })
-           }else if(res.data.code==207){
-              this.$message({
-               message:''+res.data.msg+'',
-               type:'error'
-             })
-           }else if(res.data.code==807){
-              this.$message({
-               message:''+res.data.msg+'',
-               type:'error'
-             })
-           }
-         })
+         params.append('phones',this.phone);
+         window.location.href = './SettledIn.html?params='+params+''
+
+        //  axios({
+        //    method:'post',
+        //   url:''+this.url+'/pc/merchantlogin/register',
+        //   data:params
+        //  }).then((res)=>{
+        //   //  console.log(res)
+        //    if(res.data.code==0){
+        //      localStorage.setItem('Access_token',res.data.data.accessToken)
+        //      this.$message({
+        //        message:'注册'+res.data.msg+'',
+        //        type:'success'
+        //      })
+        //     setTimeout(()=>{
+        //       window.location.href = './SettledIn.html'
+        //     },)
+        //    }else if(res.data.code==233){
+        //       this.$message({
+        //        message:''+res.data.msg+'',
+        //        type:'error'
+        //      })
+        //    }else if(res.data.code==207){
+        //       this.$message({
+        //        message:''+res.data.msg+'',
+        //        type:'error'
+        //      })
+        //    }else if(res.data.code==807){
+        //       this.$message({
+        //        message:''+res.data.msg+'',
+        //        type:'error'
+        //      })
+        //    }
+        //  })
           
       }
     },
@@ -184,7 +192,7 @@
             params.append("phone", this.phone);
             axios({
               method: "post",
-              url: "http://192.168.10.158:8082/api/v1/pc/merchantlogin/existsms",
+              url: ''+this.url+'/pc/merchantlogin/existsms',
               data: params
             }).then(res => {});
             var t = setInterval(() => {
@@ -204,6 +212,7 @@
             }, 1000);
           }
         },
+        // 返回商城我的页面
         headReturn(){
           
         }

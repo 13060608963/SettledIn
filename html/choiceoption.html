@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="../css/meitichaxun.css">
+    <link rel="stylesheet" href="../css/audit.css" />
+    <link rel="stylesheet" href="../css/choiceoption.css">
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="home">
+      <div class="head">
+        <div class="headReturn" @click="headReturn">
+          <img src="../img/left.png" alt="" />
+        </div>
+        商家入驻
+      </div>
+      <div class="bodyBox">
+            <div v-for="(item,idnex) in opsionList" class="opsionIndustry" @click="linkClick(item.linkUrl)">
+                    <p>{{item.title}}</p>
+            </div>
+      </div>    
+    </div>
+  </body>
+  <script src="../js/vue.js"></script>
+<script >
+    var app  = new Vue({
+        el:".home",
+        data:{
+            opsionList:[
+                {title:'百货购物',linkUrl:'./login.html'},
+            ]
+        },
+        methods:{
+            headReturn(){
+                //返回商城我的页面
+                // window.location.href = './login'
+            },
+            linkClick(urls){
+                window.location.href = ''+urls+'';
+            }
+        }
+    })
+  </script>
+</html>

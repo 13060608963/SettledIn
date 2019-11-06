@@ -15,7 +15,7 @@
         <div class="auditImg"><img src="../img/audit.png" alt=""></div>
         <div class="auditTitle">入驻信息提交成功</div>
         <div class="audittext">店铺审核将在七个工作日内完成，请耐心等待</div>
-        <div class="auditBtn">返回主页</div>
+        <div class="auditBtn" @click='headReturn'>返回主页</div>
       </div>
     </div>
   </body>
@@ -24,8 +24,9 @@
     var app = new Vue({
       data: {},
       methods: {
+        // 返回商城首页
         headReturn(){
-          
+          // window.location.href = ''
         }
       }
     });
