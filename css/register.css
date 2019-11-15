@@ -104,3 +104,10 @@ body{
     min-width:0;
     width: 80%;
 }
+.color_xiyi{
+  color: #0CD4D3;
+}
+.this_box{
+  margin-top: 1rem;
+  /* display: flex; */
+}

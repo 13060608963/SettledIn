@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../css/meitichaxun.css" />
     <link rel="stylesheet" href="../css/element.css" />
     <link rel="stylesheet" href="../css/register.css" />
+    <link rel="stylesheet" href="../css/vant.css">
     <title>本地商家入驻</title>
   </head>
   <body>
@@ -75,7 +76,13 @@
             <div class="verify" @click="verify" :class="[noteVerify==false?'green':'gray']">{{ noteText }}</div>
           </div>
         </div>
-        <div></div>
+
+        <div class="this_box">
+            <!-- <van-checkbox v-model="checked" checked-color="#07c160">复选框</van-checkbox> -->
+            
+            <el-checkbox v-model="checked_xieyi">我已经阅读并同意
+              </el-checkbox><span class="color_xiyi" @click="link_xieyi">《海露异业联盟平台供应商入驻协议》</span><span class="color_xiyi" @click="link_xieyi_home">《商家入驻协议》</span>
+        </div>
         <div class="putinBtn" @click='next'>
           下一步
         </div>
@@ -83,6 +90,7 @@
     </div>
   </body>
   <script src="../js/vue.js"></script>
+  <script src="../js/vant.js"></script>
   <script src="../js/element.js"></script>
   <script src="../js/axios.js"></script>
   <script>
@@ -98,8 +106,16 @@
         password: "", //密码
         passwords: "" ,//二次密码
         url:'http://192.168.10.158:8082/api/v1',
+        checked_xieyi:false,
       },
       methods: {
+        link_xieyi(){
+          window.location.href = './hailu_agreement.html'
+        },
+        link_xieyi_home(){
+          window.location.href = './merchant_agreement.html'
+            // this.$router.push({name:"merchant_agreement"})
+        },
         next() {
       var phones = /^1[34578]\d{9}$/; //手机号码格式验证
       var kong = /\s/; //含有空格正则
@@ -132,6 +148,11 @@
       }else if(kong.test(this.code)||this.code.length<4){
           this.$message({
                 message:'请输入验证码',
+                type:'warning'
+            })
+      }else if(!checked_xieyi){
+          this.$message({
+                message:'请同意平台协议',
                 type:'warning'
             })
       }else{
@@ -214,7 +235,7 @@
         },
         // 返回商城我的页面
         headReturn(){
-          
+          window.location.href = './Choiceoption.html'
         }
       }
     });

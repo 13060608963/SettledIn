@@ -106,6 +106,25 @@
             <el-checkbox v-model="yeartime">长期</el-checkbox>
           </div>
         </div>
+
+        <div class="dddddd">
+          <p><span class="span">*</span>是否为服务商</p>
+          <div class="inputs">
+            <el-radio v-model="radios" label="1">是</el-radio>
+            <el-radio v-model="radios" label="0">否</el-radio>
+          </div>
+        </div>
+
+        <div class="dddddd">
+          <p>备注</p>
+          <input
+            type="text"
+            placeholder="请输入请输入备注信息"
+            class="inputs"
+            v-model="Tips"
+          />
+        </div>
+
         <div class="dddddd">
           <p><span class="span">*</span>注册号/信用码</p>
           <input
@@ -200,6 +219,8 @@
         onesrcurl: "", //身份证正面照url
         trwosrcurl: "", //身份证背面照url
         strwisrcurl: "", //营业执照url
+        radios:'1',//是否为服务商
+        Tips:'',//备注
         url: "http://192.168.10.158:8082/api/v1",
         paramsurl: []
       },
@@ -254,11 +275,9 @@
                     });
                   }
         },
-        comback() {
-          window.history.back(-1);
-        },
+        
         headReturn() {
-          window.location.href = "./login.html";
+          window.location.href = "./register.html";
         },
         creatshop() {
           var kong = /\s/; //含有空格正则
@@ -331,6 +350,9 @@
                 params.append("landingpassword", this.paramsurl.landingpassword);
                 params.append("code", this.paramsurl.code);
                 params.append("moli", this.paramsurl.phones);
+
+                params.append('serviceProviderOrNot',this.radios);
+                params.append('remarks',this.Tips);
                 axios({
                   method: "post",
                   url: "" + this.url + "/app/merchantLogin/register",
@@ -363,6 +385,9 @@
                 params.append("landingpassword", this.paramsurl.landingpassword);
                 params.append("code", this.paramsurl.code);
                 params.append("moli", this.paramsurl.phones);
+
+                params.append('serviceProviderOrNot',this.radios);
+                params.append('remarks',this.Tips);
               axios({
                 method: "post",
                 url: "" + this.url + "/app/merchantLogin/register",
@@ -396,6 +421,8 @@
                 params.append("landingpassword", this.paramsurl.landingpassword);
                 params.append("code", this.paramsurl.code);
                 params.append("moli", this.paramsurl.phones);
+                params.append('serviceProviderOrNot',this.radios);
+                params.append('remarks',this.Tips);
                 axios({
                   method: "post",
                   url: "" + this.url + "/app/merchantLogin/register",
@@ -428,6 +455,8 @@
                 params.append("landingpassword", this.paramsurl.landingpassword);
                 params.append("code", this.paramsurl.code);
                 params.append("moli", this.paramsurl.phones);
+                params.append('serviceProviderOrNot',this.radios);
+                params.append('remarks',this.Tips);
               axios({
                 method: "post",
                 url: "" + this.url + "/app/merchantLogin/register",
