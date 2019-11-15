@@ -221,7 +221,7 @@
         strwisrcurl: "", //营业执照url
         radios:'1',//是否为服务商
         Tips:'',//备注
-        url: "http://192.168.10.158:8082/api/v1",
+        url: "http://192.168.10.165:8082/api/v1",
         paramsurl: []
       },
       created() {
@@ -478,6 +478,7 @@
               url:''+this.url+'/pc/merchantsettledin/save.do',
               data:params
             }).then((res)=>{
+              console.log(res)
               if(res.data.code==0){
                 if (!e || !window.FileReader) return
                 let reader = new FileReader()
@@ -499,6 +500,7 @@
             url:''+this.url+'/pc/merchantsettledin/save.do',
             data:params
           }).then((res)=>{
+            console.log(res)
             if(res.data.code==0){
                 if (!e || !window.FileReader) return  // 看支持不支持FileReader
                 let readers = new FileReader()
@@ -520,6 +522,7 @@
               url:''+this.url+'/pc/merchantsettledin/save.do',
               data:params
             }).then((res)=>{
+              console.log(res)
               if(res.data.code==0){
                 if (!e || !window.FileReader) return
                   let readersss = new FileReader()
