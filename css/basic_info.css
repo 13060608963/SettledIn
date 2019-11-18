@@ -1,0 +1,118 @@
+*,p{
+    margin: 0;
+    padding: 0;
+}
+[v-cloack]{
+    display: none;
+}
+.head{
+    width: 100%;
+    height: 3.5rem;
+    background: #0cd4d3;
+    text-align: center;
+    line-height: 3.5rem;
+    color: white;
+    font-size: 1.5rem;
+    position: relative;
+}
+.headReturn{
+    width: 3.5rem;
+    height: 3.5rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    
+}
+.headReturn img{
+    width: 50%;
+    height: 50%;
+    padding: 25%;
+}
+.buzou{
+    width: 100%;
+    height: 5rem;
+    display: flex;
+    align-items: center;
+}
+.buzou{
+    width: 100%;
+    height: 3.5rem;
+    display: flex;
+    padding: 0 0.5rem;
+    box-sizing: border-box;
+}
+.buzou_one{
+    width: 25%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.buzou_one .number_{
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #9597A6;
+    margin-right: 0.5rem;
+    color: #9597A6;
+}
+.buzou_one.active .number_{
+    background: #0CD4D3;
+    color: #fff;
+    border: none;
+
+}
+.buzou_one p{
+    font-size: 1.2rem;
+    color: #9597A6;
+
+}
+.buzou_one.active p{
+    color: #030303;
+}
+.gang{
+    width: 12.5%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+.gang p{
+    width: 100%;
+    border: 1px solid #9597A6;
+}
+.input_info{
+    padding: 0 0.5rem;
+    box-sizing: border-box;
+}
+.info_text{
+    font-size: 1.4rem;
+    color: #030303;
+    margin: 0.5rem 0;
+}
+.info_items{
+    height: 3rem;
+    border-bottom: 0.05rem solid #F1F1F1;
+    display: flex;
+    align-items: center;
+    
+}
+.inputs{
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 1.4rem;
+}
+.color_red{
+    color: red;
+}
+.info_items.list_cengte{
+    justify-content: space-between;
+
+}
+.color_hui{
+    color: #9597A6;
+    font-size: 1.3rem;
+}

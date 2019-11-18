@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="../css/meitichaxun.css" />
     <link rel="stylesheet" href="../css/audit.css" />
@@ -10,7 +10,7 @@
   </head>
   <body>
     <div class="audit">
-            <div class="head"><div class="headReturn" @click='headReturn'><img src="../img/left.png" alt=""></div>提交成功</div>
+            <!-- <div class="head"><div class="headReturn" @click='headReturn'><img src="../img/left.png" alt=""></div>提交成功</div> -->
       <div>
         <div class="auditImg"><img src="../img/audit.png" alt=""></div>
         <div class="auditTitle">入驻信息提交成功</div>
@@ -26,7 +26,7 @@
       methods: {
         // 返回商城首页
         headReturn(){
-          // window.location.href = ''
+          window.location.href = '../../my/myIndex.html'
         }
       }
     });

@@ -1,0 +1,16 @@
+{
+  "id": "1512396",
+  "name": "自己",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "9512489",
+      "name": "右箭头",
+      "font_class": "arrowRight",
+      "unicode": "e60f",
+      "unicode_decimal": 58895
+    }
+  ]
+}

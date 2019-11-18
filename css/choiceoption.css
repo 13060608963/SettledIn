@@ -9,6 +9,9 @@
     display: flex;
     align-items: center;
 }
+.opsionIndustry.active{
+    background-image: url("../img/bendi.png");
+}
 .opsionIndustry p{
     width: 100%;
     text-align: center;

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../css/shop_class.css">
+    <link rel="stylesheet" href="../css/meitichaxun.css">
+    <link rel="stylesheet" href="../iconfonts/iconfont.css">
+    <title>店铺类型</title>
+</head>
+<body style="margin: 0;">
+    <div id="app">
+        <div class="head">
+            <div class="headReturn" @click="comback">
+              <img src="../img/left.png" />
+            </div>
+            选择店铺类型
+          </div>
+
+          <div class="class_shop">
+            个人店（适合个人/个体工商店户入驻）
+          </div>
+          <div class="shop_option">
+                <div class="shops" v-for="(item,index) in shop_list" @click="go_shop(item.name)">
+                    <div style="border-bottom: 1px solid #F1F1F1;width: 100%;">
+                        <p class="title_text">{{item.name}}</p>
+                        <p class="title_text_color">{{item.describe}}）</p>
+                    </div>
+                    <div class="jianyou">
+                        <i class="iconfont icon-arrowRight"></i>
+                    </div>
+                </div>
+                
+                
+          </div>
+    </div>
+</body>
+<script src="../js/vue.js"></script>
+<script>
+new Vue({
+    el:'#app',
+    data:{
+        shop_list:[
+            {name:'个人店',describe:'个人身份开店（无营业执照）'},
+            {name:'个体工商店',describe:'个体工商户开店（有营业执照）'},
+        ]
+    },
+    methods:{
+        comback(){
+            window.location.href = './choiceoption.html'
+        },
+        go_shop(name){
+            localStorage.setItem("shop_class",name);
+            window.location.href = './public_file/basic_info.html' 
+
+        }
+
+    }
+})
+</script>
+</html>
